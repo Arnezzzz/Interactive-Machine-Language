@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Language</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            color: black;
+            line-height: 1.2;
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+        h2 {
+            font-size: 22px;
+            margin: 15px 0;
+            text-decoration: underline;
+        }
+        h3 {
+            font-size: 18px;
+            margin: 12px 0;
+        }
+        .program {
+            border: 2px solid black;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #f5f5f5;
+        }
+        .instruction {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            margin: 8px 0;
+            padding-left: 10px;
+        }
+        .instruction-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        .instruction-table th, .instruction-table td {
+            border: 1px solid black;
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .instruction-table th {
+            background-color: #e0e0e0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            border-top: 1px solid black;
+            padding-top: 10px;
+        }
+        .back-link {
+            text-align: center;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        .copyright {
+            font-size: 12px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+        .btn-container {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .instruction-btn {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            padding: 8px 15px;
+            margin: 5px;
+            background-color: #e0e0e0;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        .instruction-btn:hover {
+            background-color: #d0d0d0;
+        }
+        .explanation {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            background-color: #f9f9f9;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>A Simple Interactive Machine Language</h1>
+    
+    <div class="program">
+        <div class="instruction">156C</div>
+        <div class="instruction">166D</div>
+        <div class="instruction">5056</div>
+        <div class="instruction">306E</div>
+        <div class="instruction">C000</div>
+    </div>
+    
+    <div class="btn-container">
+        <button class="instruction-btn" onclick="showExplanation('156C')">156C</button>
+        <button class="instruction-btn" onclick="showExplanation('166D')">166D</button>
+        <button class="instruction-btn" onclick="showExplanation('5056')">5056</button>
+        <button class="instruction-btn" onclick="showExplanation('306E')">306E</button>
+        <button class="instruction-btn" onclick="showExplanation('C000')">C000</button>
+    </div>
+    
+    <div id="explanation156C" class="explanation">
+        Load register 5 with the bit pattern found in the memory cell at address 6C.
+    </div>
+    
+    <div id="explanation166D" class="explanation">
+        Load register 6 with the bit pattern found in the memory cell at address 6D.
+    </div>
+    
+    <div id="explanation5056" class="explanation">
+        Add the contents of register 5 and 6 as though they were two's complement representation and leave the result in register 0.
+    </div>
+    
+    <div id="explanation306E" class="explanation">
+        Store the contents of register 0 in the memory cell at address 6E.
+    </div>
+    
+    <div id="explanationC000" class="explanation">
+        Halt.
+    </div>
+    
+    <div class="back-link">Back to Projects</div>
+    
+    <h2>Appendix C: A Simple Machine Language</h2>
+    
+    <table class="instruction-table" id="instructionTable">
+        <tr>
+            <th>Op-code</th>
+            <th>Operand</th>
+            <th>Description</th>
+        </tr>
+        <tr id="row1">
+            <td>1</td>
+            <td>RXY</td>
+            <td>LOAD reg. R from cell XY.</td>
+        </tr>
+        <tr id="row2">
+            <td>2</td>
+            <td>RXY</td>
+            <td>LOAD reg. R with XY.</td>
+        </tr>
+        <tr id="row3">
+            <td>3</td>
+            <td>RXY</td>
+            <td>STORE reg. R at XY.</td>
+        </tr>
+        <tr id="row4">
+            <td>4</td>
+            <td>ORS</td>
+            <td>MOVE R to S.</td>
+        </tr>
+        <tr id="row5">
+            <td>5</td>
+            <td>RST</td>
+            <td>ADD S and T into R. (2's comp.)</td>
+        </tr>
+        <tr id="row6">
+            <td>6</td>
+            <td>RST</td>
+            <td>ADD S and T into R. (floating pt.)</td>
+        </tr>
+        <tr id="row7">
+            <td>7</td>
+            <td>RST</td>
+            <td>OR S and T into R.</td>
+        </tr>
+        <tr id="row8">
+            <td>8</td>
+            <td>RST</td>
+            <td>AND S and T into R.</td>
+        </tr>
+        <tr id="row9">
+            <td>9</td>
+            <td>RST</td>
+            <td>XOR S and T into R.</td>
+        </tr>
+        <tr id="rowA">
+            <td>A</td>
+            <td>ROX</td>
+            <td>ROTATE reg. R X times.</td>
+        </tr>
+        <tr id="rowB">
+            <td>B</td>
+            <td>RXY</td>
+            <td>JUMP to XY if R = reg. 0.</td>
+        </tr>
+        <tr id="rowC">
+            <td>C</td>
+            <td>000</td>
+            <td>HALT</td>
+        </tr>
+    </table>
+    
+    <div class="footer">
+        <div class="copyright">
+            Copyright © 2023 2015 Pearson Education, Inc. Included for UA-CHI-LLM (ISO9001: KavliERL)
+        </div>
+    </div>
+
+    <script>
+        function showExplanation(instruction) {
+            // Hide all explanations first
+            var explanations = document.getElementsByClassName('explanation');
+            for (var i = 0; i < explanations.length; i++) {
+                explanations[i].style.display = 'none';
+            }
+            
+            // Remove highlights from all rows
+            var rows = document.querySelectorAll('.instruction-table tr');
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].classList.remove('highlight');
+            }
+            
+            // Show the explanation for this instruction
+            document.getElementById('explanation' + instruction).style.display = 'block';
+            
+            // Highlight the corresponding row based on the instruction
+            var opCode = instruction.charAt(0);
+            
+            if (opCode === '1') {
+                document.getElementById('row1').classList.add('highlight');
+            } else if (opCode === '2') {
+                document.getElementById('row2').classList.add('highlight');
+            } else if (opCode === '3') {
+                document.getElementById('row3').classList.add('highlight');
+            } else if (opCode === '4') {
+                document.getElementById('row4').classList.add('highlight');
+            } else if (opCode === '5') {
+                document.getElementById('row5').classList.add('highlight');
+            } else if (opCode === '6') {
+                document.getElementById('row6').classList.add('highlight');
+            } else if (opCode === '7') {
+                document.getElementById('row7').classList.add('highlight');
+            } else if (opCode === '8') {
+                document.getElementById('row8').classList.add('highlight');
+            } else if (opCode === '9') {
+                document.getElementById('row9').classList.add('highlight');
+            } else if (opCode === 'A') {
+                document.getElementById('rowA').classList.add('highlight');
+            } else if (opCode === 'B') {
+                document.getElementById('rowB').classList.add('highlight');
+            } else if (opCode === 'C') {
+                document.getElementById('rowC').classList.add('highlight');
+            }
+        }
+    </script>
+</body>
+</html>
